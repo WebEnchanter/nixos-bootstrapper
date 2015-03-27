@@ -55,8 +55,8 @@ fi
 }
 
 prepare_sshkey_config() {
-	if [[ -n "${ROOT_SSH_KEY}" ]]; then
-		export ROOT_SSH_KEY_CONFIG="openssh.authorizedKeys.keys = [ \"${ROOT_SSH_KEY}\" ];";
+	if [[ -n "${ROOT_SSH_KEYS}" ]]; then
+		export ROOT_SSH_KEY_CONFIG="openssh.authorizedKeys.keys = [ ${ROOT_SSH_KEYS} ];";
 	else
 		unset ROOT_SSH_KEY_CONFIG
 	fi
