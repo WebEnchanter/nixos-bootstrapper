@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# <UDF name="ROOT_SSH_KEY"
-#     Label="SSH Key"
-#     example="Public SSH key for NixOS root user." />
+# <UDF name="ROOT_SSH_KEYS"
+#     Label="SSH Keys"
+#     example="Public SSH keys for NixOS root user." />
 
 # <UDF name="CHANNEL"
 #     Label="NixOS Channel"
