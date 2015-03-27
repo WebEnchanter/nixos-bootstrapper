@@ -16,7 +16,7 @@ main() {
 	mount_partitions_if_necessary
 
 	# If this is a new installation, will we be able to login?
-	if [[ ! -e "/mnt/etc/nixos/configuration.nix" ]] && [[ -z "${ROOT_SSH_KEY}" ]] && [[ -z "${ROOT_HASHED_PASSWORD}" ]]; then
+	if [[ ! -e "/mnt/etc/nixos/configuration.nix" ]] && [[ -z "${ROOT_SSH_KEYS}" ]] && [[ -z "${ROOT_HASHED_PASSWORD}" ]]; then
 		print_error 'You did not setup an SSH key or hashed password for root. Open environment.conf and setup make sure either ROOT_SSH_KEY or ROOT_HASHED_PASSWORD is set.'
 	fi
 
