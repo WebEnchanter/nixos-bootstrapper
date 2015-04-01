@@ -131,7 +131,7 @@ touch "${ENV_FILE}"
 
 # Download and run the NixOS installer
 export NIXOS_BOOTSTRAPPER="${NIXOS_BOOTSTRAPPER_DIR}/nixos-bootstrapper.sh"
-wget --output-document "${NIXOS_BOOTSTRAPPER}" 'https://github.com/webenchanter/nixos-bootstrapper/raw/master/nixos-bootstrapper.sh'
+wget --no-check-certificate --output-document "${NIXOS_BOOTSTRAPPER}" 'https://github.com/webenchanter/nixos-bootstrapper/raw/master/nixos-bootstrapper.sh'
 chmod +x "${NIXOS_BOOTSTRAPPER}"
 "${NIXOS_BOOTSTRAPPER}"
 if [[ -e "${SUCCESS_FILE}" ]]; then
