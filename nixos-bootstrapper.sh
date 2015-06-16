@@ -9,7 +9,7 @@ main() {
 		FILE_PATH="${NIXOS_BOOTSTRAPPER_DIR}/${FILE}"
 		LOCAL_FILE="${FILE_PATH}"
 		[[ "${FILE}" == 'environment.conf' ]] && [[ -f "${FILE_PATH}" ]] && LOCAL_FILE="${FILE_PATH}.default"
-		wget --no-check-certificate --output-document "${LOCAL_FILE}" "${NIXOS_BOOTSTRAPPER_BASEURL}/${FILE}"
+		curl --output "${LOCAL_FILE}" "${NIXOS_BOOTSTRAPPER_BASEURL}/${FILE}"
 		if [[ "${FILE}" == 'nixos-installer.sh' ]]; then
 			rm -f "${SUCCESS_FILE}"
 			(source "${FILE_PATH}")
