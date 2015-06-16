@@ -83,6 +83,8 @@ BOOT_PART
 else
 	unset BOOTFS_CONFIG
 fi
+
+require_variable "${BOOTLOADER_DEVICE}" BOOTLOADER_DEVICE
 }
 
 activate_boot_partition() {

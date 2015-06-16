@@ -226,9 +226,7 @@ cat <<CONFIG > "${temp_config}"
   boot = {
       loader.grub = {
  	    enable = true;
- 	    version = 1;
- 	    extraPerEntryConfig = "root (hd0)";
- 	    device = "nodev";
+ 	    device = "${BOOTLOADER_DEVICE}";
       };${LUKS_DEVICES}
   };
 

@@ -49,6 +49,21 @@
 #     default="root"
 #     example="LVM Logical Volume name for root partion" />
 
+# <UDF name="BOOTLOADER_DEVICE"
+#     Label="Bootloader Device"
+#     default="/dev/sda"
+#     example="The device into which the bootloader will be installed." />
+
+# <UDF name="BOOT_PART"
+#     Label="Boot Partition"
+#     default="/dev/sda1"
+#     example="Your /boot partition." />
+
+# <UDF name="ROOT_PART"
+#     Label="Root Partition"
+#     default="/dev/sda1"
+#     example="The partition which will carry your root (/)." />
+
 # <UDF name="USE_SWAP"
 #     Label="Use Linode Swap Disk"
 #     oneOf="yes,no"
@@ -57,21 +72,8 @@
 
 # <UDF name="SWAP_PART"
 #     Label="Swap Disk"
-#     oneOf="/dev/xvdb"
-#     default="/dev/xvdb"
-#     example="You can't change this. This script expects that your swap disk will be mounted on /dev/xvdb if you opted to use Linode's swap disk above." />
-
-# <UDF name="BOOT_PART"
-#     Label="Boot Disk"
-#     oneOf="/dev/xvdc,/dev/xvdd"
-#     default="/dev/xvdc"
-#     example="If you leave this as /dev/xvdc you will have a separate boot partition. This is necessary if you are using LVM on root or if you are encrypting the root partition. Changing it to /dev/xvdd (same partition as root) will disable a separate boot partition." />
-
-# <UDF name="ROOT_PART"
-#     Label="Root Disk"
-#     oneOf="/dev/xvdd"
-#     default="/dev/xvdd"
-#     example="You can't change this. This script expects that your root disk will be mounted on /dev/xvdd when you boot your linode for the first time." />
+#     default="/dev/sda2"
+#     example="Your SWAP disk/partition." />
 
 export USER=root
 export PASSPHRASE="${ROOT_PART_ENCRYPTION_PASSWORD}"
