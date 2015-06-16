@@ -76,7 +76,6 @@ export BOOTFS_CONFIG=$(cat <<BOOT_PART
 
   fileSystems."/boot" = { 
     device = "${BOOT_DEVICE}";
-    fsType = "${BOOT_FSTYPE}";
   };
 
 BOOT_PART

@@ -9,9 +9,6 @@ main() {
 	# If using LVM
 	prepare_logical_volumes_if_necessary
 
-	# Format partitions
-	format_partitions_if_necessary
-
 	# Mount default partitions
 	mount_partitions_if_necessary
 

@@ -93,7 +93,6 @@ prepare_logical_volumes_if_necessary() {
 	if [[ "${USE_LVM}" == "yes" ]];  then
 		[[ -z "${VOLUME_GROUP}" ]] && require_variable "${VOLUME_GROUP}" VOLUME_GROUP
 		[[ -z "${LV_ROOT}" ]] && require_variable "${LV_ROOT}" LV_ROOT
-		[[ -z "${LV_ROOT_EXTRA_OPTIONS}" ]] && require_variable "${LV_ROOT_EXTRA_OPTIONS}" LV_ROOT_EXTRA_OPTIONS
 		vgscan --mknodes
 		vgchange -ay
 		if [[ -n "${PASSPHRASE}" ]];  then
@@ -102,26 +101,10 @@ prepare_logical_volumes_if_necessary() {
 		else
 			PV="${ROOT_PART}"
 		fi
-		pvdisplay "${PV}" >/dev/null 2>&1 || pvcreate "${PV}"
-		vgdisplay "${VOLUME_GROUP}" >/dev/null 2>&1 || vgcreate "${VOLUME_GROUP}" "${PV}"
-		lvdisplay "${LV_ROOT}" >/dev/null 2>&1 || lvcreate "${LV_ROOT_EXTRA_OPTIONS}" -n "${LV_ROOT}" "${VOLUME_GROUP}"
+		pvdisplay "${PV}" >/dev/null 2>&1 || print_error "LVM PV ${PV} doesn't exists. You have to create it first..."
+		vgdisplay "${VOLUME_GROUP}" >/dev/null 2>&1 || print_error "LVM VG ${VOLUME_GROUP} doesn't exist. You have to create it first..."
+		lvdisplay "${LV_ROOT}" >/dev/null 2>&1 || print_error "LVM LV ${LV_ROOT} doesn't exist. You have to create it first..."
 	fi
-}
-
-format_partitions_if_necessary() {
-	if [[ "${SEPARATE_BOOT_PART}" == "yes" ]]; then
-		[[ "$(blkid -s TYPE -o value ${BOOT_PART})" == "${BOOT_FSTYPE}" ]] \
-			|| mkfs.${BOOT_FSTYPE} ${BOOT_FSOPTIONS} ${BOOT_PART} \
-			|| print_error "Failed to format ${BOOT_PART}"
-	fi
-	if [[ "${USE_SWAP}" == 'yes' ]]; then
-		require_variable "${SWAP_PART}" SWAP_PART
-		swapoff --all
-		mkswap -L swap "${SWAP_PART}"
-	fi
-	[[ "$(blkid -s TYPE -o value ${TARGET_ROOT_DEVICE})" == "${ROOT_FSTYPE}" ]] \
-		|| mkfs.${ROOT_FSTYPE} ${ROOT_FSOPTIONS} ${TARGET_ROOT_DEVICE} \
-		|| print_error "Failed to format ${TARGET_ROOT_DEVICE}"
 }
 
 mount_device() {
@@ -251,7 +234,6 @@ cat <<CONFIG > "${temp_config}"
 
   fileSystems."/" = {
     device = "${ROOT_DEVICE}";
-    fsType = "${ROOT_FSTYPE}";
   };
 ${BOOTFS_CONFIG}
 
