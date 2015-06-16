@@ -227,17 +227,6 @@ install_nixos() {
 	echo "${output}" | grep 'finalising the installation...' >/dev/null 2>&1 || print_error "An error occurred while running NixOS installer."
 }
 
-fix_grub() {
-	mkdir -p /mnt/boot/boot/grub
-	cd /mnt/boot/boot/grub
-	ln -sf ../../grub/menu.lst
-	cd /root
-}
-
-fix_grub_if_necessary() {
-	[[ "${SEPARATE_BOOT_PART}" == "yes" ]] && fix_grub
-}
-
 install_dependancies() {
 	nix-env -i cryptsetup lvm2 xfsprogs
 }

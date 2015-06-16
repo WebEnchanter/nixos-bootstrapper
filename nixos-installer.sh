@@ -30,9 +30,6 @@ main() {
 	# Install NixOS
 	install_nixos
 
-	# Fix grub
-	fix_grub_if_necessary
-
 	touch "${SUCCESS_FILE}"
 }
 
