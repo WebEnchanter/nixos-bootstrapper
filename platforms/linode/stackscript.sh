@@ -49,11 +49,6 @@
 #     default="root"
 #     example="LVM Logical Volume name for root partion" />
 
-# <UDF name="LV_ROOT_EXTRA_OPTIONS"
-#     Label="Root LV Extra Options"
-#     default="-L 15G"
-#     example="Extra options to pass to lvcreate for the root partition." />
-
 # <UDF name="USE_SWAP"
 #     Label="Use Linode Swap Disk"
 #     oneOf="yes,no"
@@ -66,31 +61,11 @@
 #     default="/dev/xvdb"
 #     example="You can't change this. This script expects that your swap disk will be mounted on /dev/xvdb if you opted to use Linode's swap disk above." />
 
-# <UDF name="BOOT_FSTYPE"
-#     Label="Boot Partition Filesystem"
-#     oneOf="ext2,ext3,ext4"
-#     default="ext2" />
-
-# <UDF name="BOOT_FSOPTIONS"
-#     Label="Boot Partition Filesystem Options"
-#     default="-F -L boot"
-#     example="These will be passed to mkfs when formating your partition." />
-
 # <UDF name="BOOT_PART"
 #     Label="Boot Disk"
 #     oneOf="/dev/xvdc,/dev/xvdd"
 #     default="/dev/xvdc"
 #     example="If you leave this as /dev/xvdc you will have a separate boot partition. This is necessary if you are using LVM on root or if you are encrypting the root partition. Changing it to /dev/xvdd (same partition as root) will disable a separate boot partition." />
-
-# <UDF name="ROOT_FSTYPE"
-#     Label="Root Partition Filesystem"
-#     oneOf="ext4,xfs"
-#     default="ext4" />
-
-# <UDF name="ROOT_FSOPTIONS"
-#     Label="Root Partition Filesystem Options"
-#     default="-F -O dir_index -j -L root"
-#     example="These will be passed to mkfs when formating your partition." />
 
 # <UDF name="ROOT_PART"
 #     Label="Root Disk"
@@ -117,9 +92,6 @@ populate_env_file() {
 	sed -i "s/USE_LVM='.*'/USE_LVM='${USE_LVM}'/" 						"${ENV_FILE}"
 	sed -i "s/VOLUME_GROUP='.*'/VOLUME_GROUP='${VOLUME_GROUP}'/" 				"${ENV_FILE}"
 	sed -i "s/LV_ROOT='.*'/LV_ROOT='${LV_ROOT}'/" 						"${ENV_FILE}"
-	sed -i "s/LV_ROOT_EXTRA_OPTIONS='.*'/LV_ROOT_EXTRA_OPTIONS='${LV_ROOT_EXTRA_OPTIONS}'/" "${ENV_FILE}"
-	sed -i "s/BOOT_FSTYPE='.*'/BOOT_FSTYPE='${BOOT_FSTYPE}'/" 				"${ENV_FILE}"
-	sed -i "s/BOOT_FSOPTIONS='.*'/BOOT_FSOPTIONS='${BOOT_FSOPTIONS}'/" 			"${ENV_FILE}"
 	sed -i "s/ROOT_PART='.*'/ROOT_PART='${ROOT_PART}'/" 					"${ENV_FILE}"
 	sed -i "s/USE_SWAP='.*'/USE_SWAP='${USE_SWAP}'/" 					"${ENV_FILE}"
 	sed -i "s/SWAP_PART='.*'/SWAP_PART='${SWAP_PART}'/" 					"${ENV_FILE}"
