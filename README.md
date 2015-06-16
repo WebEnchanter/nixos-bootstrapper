@@ -9,8 +9,8 @@ bash
 NIXOS_BOOTSTRAPPER_DIR='/root/nixos-bootstrapper'
 NIXOS_BOOTSTRAPPER_CONFIG_FILE="$NIXOS_BOOTSTRAPPER_DIR/environment.conf"
 mkdir -p $NIXOS_BOOTSTRAPPER_DIR
-wget --output-document $NIXOS_BOOTSTRAPPER_CONFIG_FILE https://raw.githubusercontent.com/webenchanter/nixos-bootstrapper/master/environment.conf
+curl --output $NIXOS_BOOTSTRAPPER_CONFIG_FILE https://raw.githubusercontent.com/webenchanter/nixos-bootstrapper/master/environment.conf
 nano $NIXOS_BOOTSTRAPPER_CONFIG_FILE
-wget https://raw.githubusercontent.com/webenchanter/nixos-bootstrapper/master/nixos-bootstrapper.sh
+curl --remote-name https://raw.githubusercontent.com/webenchanter/nixos-bootstrapper/master/nixos-bootstrapper.sh
 source nixos-bootstrapper.sh
 ```
