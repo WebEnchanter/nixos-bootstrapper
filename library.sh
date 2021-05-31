@@ -156,7 +156,7 @@ install_nix() {
 	if command -v nix-env >/dev/null 2>&1; then
 		echo "INFO: Nix package manager is already installed. Doing nothing."
 	else
-		curl https://nixos.org/nix/install | sh
+		curl -L https://nixos.org/nix/install | sh
 		source "${HOME}/.nix-profile/etc/profile.d/nix.sh"
 	fi
 }
