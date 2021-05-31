@@ -6,7 +6,7 @@
 
 # <UDF name="CHANNEL"
 #     Label="NixOS Channel"
-#     default="https://nixos.org/channels/nixos-14.12-small" />
+#     default="https://nixos.org/channels/nixos-20.09-small" />
 
 # <UDF name="MUTABLE_USERS"
 #     Label="Enable Mutable Users"
